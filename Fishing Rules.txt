@@ -1,0 +1,49 @@
+---------------------------------------------------------------------------------
+                    Running Fedwin's Fishing Companion
+---------------------------------------------------------------------------------
+
+                            ~Skill Check Page~
+To run Fedwin's Fishing Companion, you first need to put in your proficiency modifier.
+You and your GM should consider how that applies. I use either no modifier, full proficiency,
+or double proficiency for mastery. You could also use the Survival Skill or a custom skill if
+that more handily fits your needs. You will then choose how many times you will cast.
+My general rule of thumb is that a single cast will take roughly 10 minutes. This isn't
+exactly realistic, but feels like a good balance for my game. Feel free to rule on this
+yourself. Either way, figure out how many casts you are going to make and put in that number
+as well. Then hit the confirm button.
+
+                                ~Region Page~
+At this page, you have the option of 9 regions, each which have their own catchables lists.
+Discuss with your GM which of these regions most closely matches your given region. Press
+that button and it should automatically pick all of the fish that you have caught from that
+region table and in the case you have critical failures or successes, it will select items
+from separate lists that I made for those cases.
+
+                                ~Roll Effects~
+Now you may be wondering what benefit you derive from having better rolls in fishing. To keep
+fishing simple and enjoyable, I have you catching something at every opportunity in version 1.0. 
+The quality of your roll will impact how many fish are caught during a single casting period.
+Technically based on my other rule, that means you are catching two fish at once, but hey,
+lay off me.
+
+---------------------------------------------------------------------------------
+                                Why I Made FFC
+---------------------------------------------------------------------------------
+Thank you for choosing to use Fedwin's Fishing Companion! This application provides
+automation for a fishing ruleset I originally wrote for use in my game. It was a useful
+tool to me at the time, but it was time consuming and limiting to use it frequently.
+This application automates that process and lets me have a wider variety of catchables
+both for every region but adding more regions without creating what is essentially just
+a fishing TTRPG instead of a small minigame for D&D.
+
+---------------------------------------------------------------------------------
+                                Compatible TTRPGs
+---------------------------------------------------------------------------------
+I built Fedwin's Fishing Companion around D&D 5e pricing, which is to say I made
+much of the pricing up on what I thought seemed in balance with other items in 5e.
+You're welcome to use it for other games, but the price values added in version 2
+may or may not be in balance with your particular game world.
+
+Additionally, the skillchecks in this program are based around a d20 and a 5e
+proficiency modifier, so your accuracy may vary based on these rules. Edits to
+change this could be made easily enough if there are wishes for that to be the case.
