@@ -23,9 +23,9 @@ def Ecosystem(rolls):
     
     #Salt Water options in Column 0
     saltlabel = Label(frame, text='Salt')
-    ocean = Button(frame, text='Ocean', width=10)
-    shore = Button(frame, text='Shore', width=10)
-    sea = Button(frame, text='Sea', width=10)
+    ocean = Button(frame, text='Ocean', width=10, command=lambda : FishResults('ocean', rolls))
+    shore = Button(frame, text='Shore', width=10, command=lambda : FishResults('shore', rolls))
+    sea = Button(frame, text='Sea', width=10, command=lambda : FishResults('sea', rolls))
 
     saltlabel.grid(column=0, row=1)
     ocean.grid(column=0, row=2)
@@ -34,9 +34,9 @@ def Ecosystem(rolls):
     
     #Brackish Water Options in column 1
     brackishlabel = Label(frame, text='Brackish')
-    estuary = Button(frame, text='Estuary', width=10)
-    bay = Button(frame, text='Bay', width=10)
-    bracklake = Button(frame, text='Lake', width=10)
+    estuary = Button(frame, text='Estuary', width=10, command=lambda : FishResults('estuary', rolls))
+    bay = Button(frame, text='Bay', width=10, command=lambda : FishResults('bay', rolls))
+    bracklake = Button(frame, text='Lake', width=10, command=lambda : FishResults('bracklake', rolls))
 
     brackishlabel.grid(column=1, row=1)
     estuary.grid(column=1, row=2)
@@ -45,9 +45,9 @@ def Ecosystem(rolls):
 
     #Fresh Water Options in column 2
     freshlabel = Label(frame, text='Fresh')
-    river = Button(frame, text='River', width=10)
-    freshlake = Button(frame, text='Lake', width=10)
-    swamp = Button(frame, text='Swamp', width=10)
+    river = Button(frame, text='River', width=10, command=lambda : FishResults('river', rolls))
+    freshlake = Button(frame, text='Lake', width=10, command=lambda : FishResults('freshlake', rolls))
+    swamp = Button(frame, text='Swamp', width=10, command=lambda : FishResults('swamp', rolls))
 
     freshlabel.grid(column=2, row=1)
     river.grid(column=2, row=2)
@@ -56,12 +56,12 @@ def Ecosystem(rolls):
 
     #Misc Options
     misclabel = Label(frame, text='Misc')
-    ice = Button(frame, text='Ice', width=10)
-    underground = Button(frame, text='Underground', width=10)
-    arcane = Button(frame, text='Arcane', width=10)
+    deepsea = Button(frame, text='Deep Sea', width=10, command=lambda : FishResults('deepsea', rolls))
+    underground = Button(frame, text='Underground', width=10, command=lambda : FishResults('underground', rolls))
+    arcane = Button(frame, text='Arcane', width=10, command=lambda : FishResults('arcane', rolls))
 
     misclabel.grid(column=3, row=1)
-    ice.grid(column=3, row=2)
+    deepsea.grid(column=3, row=2)
     underground.grid(column=3, row=3)
     arcane.grid(column=3, row=4)
 
@@ -104,6 +104,11 @@ def SkillCheck():
             SkillCheck()
             return
 
+        def PrepEco(rolls):
+            resultsframe.destroy()
+            ClearFrame(frame)
+            Ecosystem(rolls)
+
         if rolls == 0:
             rollresults.insert(END, 'Looks like you didn\'t make any casts. Select Back to try again or Continue to close.')
             back = Button(resultsframe, text='Back', command=lambda : RestartSkillCheck(), width=10)
@@ -113,26 +118,105 @@ def SkillCheck():
                 outcome = randint(1,20)
                 rollresults.insert(END, f'Roll # {roll+1}: {outcome} + {modifier}\n')
                 if outcome == 1: 
-                    rollresults.insert('Critical Failure! :(')
+                    rollresults.insert(END, 'Critical Failure! :(')
                     outcomeslist.append('fail')
                 elif outcome == 20:
-                    rollresults.insert('Critical Success! :)')
+                    rollresults.insert(END, 'Critical Success! :)')
                     outcomeslist.append('success')
                 else:
                     outcomeslist.append(outcome+modifier)
 
             back = Button(resultsframe, text='Back', command=lambda : RestartSkillCheck(), width=10)
-            cont = Button(resultsframe, text='Continue', command=lambda : Ecosystem(outcomeslist), width=10)
+            cont = Button(resultsframe, text='Continue', command=lambda : PrepEco(outcomeslist), width=10)
 
         rollresults.grid(columnspan=3, rowspan=2)
         back.grid(column=0, row=3)
         cont.grid(column=2, row=3)
+    
 
     #Confirm the input numbers and get back a result of the rolls
     confirm = Button(frame, text='Confirm Modifier and Casts', command=lambda : RollD20(casts, modifier))
     confirm.grid(columnspan=2, row=3)
 
     frame.pack()
+    return
+
+#Clear the main frame so it can be rebuilt
+def ClearFrame(frame):
+    for widget in frame.winfo_children():
+        widget.destroy()
+    return
+
+#Get the results of each fishing roll
+def FishResults(water, rolls):
+    ocean = ['anchovy', 'sardine', 'snapper', 'eel', 'hake', 'cod', 'salmon', 'barracuda', 'tuna', 'grouper', 'pufferfish',  'sunfish', 'sailfish', 'marlin', 'shark']
+    shore = ['anchovy', 'bluefish', 'snapper', 'eel', 'mackerel', 'drum', 'flounder', 'barracuda', 'seatrout', 'pufferfish', 'snook', 'ray', 'zebrafish', 'shark']
+    sea = ['anchovy', 'goby', 'pecarina', 'scup', 'shad', 'bream', 'porgy', 'eel', 'hagfish', 'pinfish', 'barracuda',  'pufferfish', 'mackerel', 'sturgeon']
+    estuary = ['sole', 'perch', 'flounder', 'eel', 'barramundi', 'bass', 'bream', 'pufferfish', 'mullet', 'trout', 'snapper', 'drum', 'grouper', 'sturgeon']
+    bay = ['smelt', 'perch', 'herring', 'haddock', 'eel', 'bass', 'cod', 'pufferfish', 'scup', 'pollock', 'halibut', 'flounder', 'mackerel', 'tuna', 'shark']
+    bracklake = ['goby', 'mudskipper', 'sheepshead', 'bass', 'snook', 'eel', 'tarpon', 'catfish', 'drum', 'pufferfish']
+    river = ['pickerel', 'bluegill', 'crappie', 'perch', 'catfish', 'carp', 'bass', 'trout', 'salmon', 'pike', 'sturgeon', 'muskellunge (muskie)', 'paddldfish']
+    freshlake = ['pickerel', 'bluegill', 'crappie', 'perch', 'catfish', 'carp', 'bass', 'trout', 'bowfin', 'pike', 'sturgeon', 'muskellunge (muskie)']
+    swamp = ['pickerel', 'darter', 'bluegill', 'crappie', 'perch', 'catfish', 'carp', 'murrel', 'bass', 'eel', 'gar', 'muskellunge (muskie)']
+    critfail = ['shoe', 'broken glasses', 'stick', 'weeds', 'algae', 'hung line - have to cut', 'old clothing']
+    critsucc = ['another fishing rod', 'a small coin purse with 100 copper pieces', 'a small item with a minor enchantment', 'a particularly rare fish worth 1 gold piece', 'a healing herb equal to a lesser healing potion']
+    deepsea = ['frogfish', 'batfish', 'handfish', 'viperfish', 'anglerfish', 'oarfish']
+    underground = ['blind tetra', 'cavefish', 'characid', 'caveskipper', 'luminescent pickerel', 'cave salamander', 'sightless bass']
+    arcane = ['comet', 'goldbulb', 'acidfish', 'blink-fish', 'stone fish', 'illisquid', 'babblefish', 'ghostfish']
+
+    resultsframe = Toplevel(window)
+    resultsframe.title('Catches')
+    restart = Button(resultsframe, text='Restart', width=10, command=lambda : RestartSkillCheck())
+    exitbutton = Button(resultsframe, text='Quit', width=10, command=lambda : exit())
+    catchresults = ScrolledText(resultsframe, width=50, height=10)
+    multiplier = 1 #default multiplier is 1
+
+    def select(lst, mult):
+        chosen = randint(0, (len(lst)-1))
+        if mult > 1:
+            catchresults.insert(END, f'{mult} x {lst[chosen]}\n')
+        else:
+            catchresults.insert(END, f'{lst[chosen]}\n')
+
+        return
+
+    for roll in rolls:
+        if roll == 'fail':
+            multiplier = 1
+            select(critfail, multiplier)
+        elif roll == 'success':
+            multiplier = 1
+            select(critsucc, multiplier)
+        else:
+            if roll <= 15:
+                multiplier = 1
+            elif roll <= 20:
+                multiplier = 2
+            elif roll > 20:
+                multiplier = 3
+            if water == 'ocean': (select(ocean, multiplier))
+            if water == 'shore': (select(shore, multiplier))
+            if water == 'sea': (select(sea, multiplier))
+            if water == 'estuary': (select(estuary, multiplier))
+            if water == 'bay': (select(bay, multiplier))
+            if water == 'bracklake': (select(bracklake, multiplier))
+            if water == 'river': (select(river, multiplier))
+            if water == 'freshlake': (select(freshlake, multiplier))
+            if water == 'swamp': (select(swamp, multiplier))
+            if water == 'deepsea': (select(deepsea, multiplier))
+            if water == 'underground': (select(underground, multiplier))
+            if water == 'arcane': (select(arcane, multiplier))
+
+    def RestartSkillCheck():
+        resultsframe.destroy()
+        ClearFrame(frame)
+        SkillCheck()
+        return
+
+    catchresults.grid(columnspan=3, rowspan=2)
+    restart.grid(column=0, row=3)
+    exitbutton.grid(column=2, row=3)
+
     return
 
 if __name__ == '__main__':
